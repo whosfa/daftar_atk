@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -23,6 +24,8 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
+
+/*
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
@@ -31,6 +34,23 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }
+*/
+
+
+
+public function store(LoginRequest $request): RedirectResponse
+{
+    $request->authenticate();
+    $request->session()->regenerate();
+
+    if (auth()->user()->role === 'admin') {
+        return redirect()->route('admin.index');
+    }
+    
+
+    return redirect()->route('atk.index'); // user biasa ke halaman utama
+}
+
 
     /**
      * Destroy an authenticated session.

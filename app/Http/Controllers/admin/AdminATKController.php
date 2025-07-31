@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\Atk;
 use Illuminate\Http\Request;
+use App\Http\Controllers\controller;
 
 class AdminATKController extends Controller
 {
