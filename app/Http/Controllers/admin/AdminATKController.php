@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
 use App\Models\Atk;
 use Illuminate\Http\Request;
+use App\Http\Controllers\controller;
 
 class AdminATKController extends Controller
 {
@@ -20,13 +21,16 @@ class AdminATKController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required',
+       $validated = $request->validate([
+            'nama' => 'required|string',
             'kategori' => 'required',
-            'stok' => 'required|integer'
+            'stok' => 'required|integer',
+             'deskripsi' => 'nullable|string'
         ]);
+        // Simpan ke database
+        Atk::create($validated);
+    
 
-        Atk::create($request->all());
         return redirect()->route('admin.index')->with('success', 'ATK berhasil ditambahkan');
     }
 
@@ -41,7 +45,8 @@ class AdminATKController extends Controller
         $request->validate([
             'nama' => 'required',
             'kategori' => 'required',
-            'stok' => 'required|integer'
+            'stok' => 'required|integer',
+            'deskripsi' => 'required'
         ]);
 
         $atks = Atk::findOrFail($id);
