@@ -16,52 +16,56 @@
             <div class="d-flex align-items-center">
         
                 {{-- Tombol Tambah --}}
-                <a href="{{ route('admin.create') }}" class="btn btn-primary">Tambah</a>
+                <a href="{{ route('admin.create') }}" class="btn btn-primary ms-2 me-2">Tambah</a>
 
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="btn btn-outline-danger">Logout</button>
-                </form>
-                
+                    <button type="submit" class="btn btn-danger">Logout</button>
+                </form>    
             </div>
         </div>
-        
-       
-        
-     
 
+        
+
+        <div class="mb-3">
+            <form action="{{ route('admin.index') }}" method="GET" class="me-2 me-2">
+                <input type="text" name="q" class="form-control" placeholder="Cari ATK..." value="{{ request('q') }}">
+            </form>
+        </div>
+        
         <!--tabel data-->
-        <h5 class="mt-3">Daftar</h5>
-        <table class="table mt-3">
-
-            <head>
-                <tr>
+       
+        <table class="table">
+            <thead>
+                <tr class="table-danger">
                     <th>No</th>
                     <th>Nama</th>
                     <th>Stok</th>
                     <th>Kategori</th>
-                    <th>Deskripsi</th>
+                    <th>Aksi</th>
                 </tr>
-            </head>
+            </thead>
             <tbody>
-                @foreach ($atks as $index => $atks)
+                @foreach ($atks as $index => $atk)
                                 <tr>
                                     <td>{{$index + 1}}</td>
-                                    <td>{{$atks->nama}}</td>
-                                    <td>{{$atks->stok}}</td>
-                                    <td>{{$atks->kategori}}</td>
-                                    <td>{{$atks->deskripsi}}</td>
-                                   
-                                    <td>
+                                    <td>{{$atk->nama}}</td>
+                                    <td>{{$atk->stok}}</td>
+                                    <td>{{$atk->kategori}}</td> 
+                                <td>
                                         {{-- Hapus --}}
-                                        <form action="{{ route('admin.destroy' , $atks->id) }}" method="POST" class="d-inline">
+                                        <form action="{{ route('admin.destroy' , $atk->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-link text-danger p-0">Hapus</button>
                                         </form>
 
                                         {{-- Edit --}}
-                                        <a href="{{ route('admin.edit', $atks->id) }}" class="text-warning ms-2 me-2">Edit</a>
+                                        <a href="{{ route('admin.edit', $atk->id) }}" class="text-warning ms-2 me-2">Edit</a>
+
+                                        {{-- Show --}}
+                                        <a href="{{ route('atk.show', $atk->id) }}" class="btn btn-info btn-sm">Show</a>
+                                </td>
                                 </tr>
                 @endforeach
             </tbody>

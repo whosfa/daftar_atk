@@ -13,18 +13,18 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h3 class="mb-0">Daftar ATK</h3>
             <a href="{{ route('login') }}" class="btn btn-primary">Login sebagai Admin</a>
-        </div>
+        </div>  
 
         <!-- Tabel data -->
-        <h5 class="mt-3">Daftar</h5>
-        <table class="table mt-3">
-            <thead>
-                <tr>
+         
+        <table class="table">
+            <thead class="thead-dark">
+                <tr class="table-success">
                     <th>No</th>
                     <th>Nama</th>
                     <th>Stok</th>
                     <th>Kategori</th>
-                    <th>Deskripsi</th>
+                    <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,7 +34,9 @@
                         <td>{{ $atk->nama }}</td>
                         <td>{{ $atk->stok }}</td>
                         <td>{{ $atk->kategori }}</td>
-                        <td>{{ $atk->deskripsi }}</td>
+                        <td>
+                        <a href="{{ route('atk.show', $atk->id) }}" class="btn btn-info btn-sm">Show</a>
+                        </td>   
                     </tr>
                 @endforeach
             </tbody>
