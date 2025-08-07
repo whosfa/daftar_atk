@@ -9,8 +9,11 @@
 <body>
 
 <div class="container mt-4">
+    <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">← Kembali</a>
+
     <h2>Edit</h2>
-    <form action="{{ route('admin.update', $atks->id) }}" method="POST">
+    <form action="{{ route('admin.update', $atks->id) }}" method="POST" enctype="multipart/form-data">
+
         @csrf
         @method('PUT')
 
@@ -23,6 +26,16 @@
             <label for="stok" class="form-label">Stok</label>
             <textarea name="stok" type="number" class="form-control" required>{{ $atks->stok }}</textarea>
         </div>
+
+        <div class="mb-3">
+            <label class="block">Gambar</label>
+            <input type="file" name="gambar" class="w-full border rounded p-2">
+            @if ($atks->gambar)
+                <p class="text-sm mt-1">Gambar saat ini:</p>
+                <img src="{{ asset('uploads/atk/' . $atks->gambar) }}" class="w-32 h-24 object-cover mt-1">
+            @endif
+        </div>
+        
 
         <div class="mb-3">
             <label for="kategori" class="form-label">Kategori</label>
