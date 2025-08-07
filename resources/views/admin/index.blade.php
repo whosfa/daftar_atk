@@ -57,7 +57,8 @@
                                         <form action="{{ route('admin.destroy' , $atk->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-link text-danger p-0">Hapus</button>
+                    <button type="submit" class="btn btn-link text-danger p-0" onclick="return confirm('Apakah kamu yakin ingin menghapus item ini?')">Hapus</button>
+
                                         </form>
 
                                         {{-- Edit --}}
