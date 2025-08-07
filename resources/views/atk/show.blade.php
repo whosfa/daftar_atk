@@ -9,9 +9,15 @@
 </head>
 <body>
    
-<div class="container mt-4">
-    <a href="{{ url()->previous() }}" class="btn btn-secondary mb-3">← Kembali</a>
+<div class="container mt-2">
+    <div class="mb-2">
+    <a href="{{ url()->previous() }}" class="btn btn-outline-secondary">← Kembali</a>
+    </div>
 
+    <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Detail ATK</h4>
+    </div>
     <div class="card shadow">
         <div class="row g-0"> 
             <div class="col-md-5">
@@ -26,11 +32,12 @@
                     <h4 class="card-title">{{ $atks->nama }}</h4>
                     <p><strong>Kategori:</strong> {{ $atks->kategori }}</p>
                     <p><strong>Stok:</strong> {{ $atks->stok }}</p>
-                    <p><strong>Deskripsi:</strong><br>{{ $atks->deskripsi ?? '-' }}</p>
+                    <p><strong>Deskripsi:</strong><br>{{ $atks->deskripsi}}</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
