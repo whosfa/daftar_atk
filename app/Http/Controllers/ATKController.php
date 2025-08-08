@@ -15,6 +15,10 @@ class ATKController extends Controller
         return view('atk.index', compact('atks'));
        }
 
+      public function tabel() {
+        $atks = Atk::all();
+        return view('atk.tabel', compact('atks'));
+      }
       
     public function show($id)
     {
@@ -26,6 +30,6 @@ class ATKController extends Controller
     {
         $query = request('q');
         $atks = Atk::where('nama', 'like', "%$query%")->get();
-        return view('atk.index', compact('atks'));
+        return view('atk.tabel', compact('atks'));
     }
 }
