@@ -9,13 +9,13 @@ Route::get('/', [ATKController::class, 'index'])
     ->middleware('role.redirect')
     ->name('atk.index');
 
-
+    Route::get('/tabel', [ATKController::class, 'tabel'])
+     ->middleware('role.redirect')
+    ->name('atk.tabel');
 
 Route::get('/{id}', [ATKController::class, 'show'])
     ->where('id', '[0-9]+')
     ->name('atk.show');
-
-Route::get('/search' , [ATKController::class, 'search']);
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/index', [AdminATKController::class, 'index'])->name('index');
