@@ -7,7 +7,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
    
 </head>
-<body>
+<body>				
+
+						<div class="position-absolute start-0 top-0 w-100 h-100" style="background: radial-gradient(125% 125% at 50% 10%, white 40%, rgba(var(--bs-primary-rgb), 1) 100%);">
+
+						
 
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -115,6 +119,8 @@
             </tbody>
         </table>
         </div>
+    </div>
+
     </div>
 </body>
 
