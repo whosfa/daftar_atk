@@ -99,73 +99,65 @@
     </div>
   </form>
 
-  <!-- ======================== Category Buttons ======================== -->
-  <div class="flex items-center justify-center mt-2 py-4 md:py-8 flex-wrap">
-    <!-- All Categories Button (Special Color) -->
-    <button type="button" id="all-categories"
-      class="active rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #4338ca; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#5b63d3'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#6366f1'">
-      All Categories
-    </button>
-    
-    <!-- Regular Category Buttons -->
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Kertas & Amplop
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Alat Tulis
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Perlengkapan Meja Kantor
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Perlengkapan Pengarsipan
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Alat Jepit & Klip
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Staples & Pelubang
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Tinta & Cartridge
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Perekat & Isolasi
-    </button>
-    <button type="button" class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
-      style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
-      onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
-      onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
-      Baterai
-    </button>
-  </div>
+ <!-- ======================== Category Buttons ======================== -->
+<div class="flex items-center justify-center mt-2 py-4 md:py-8 flex-wrap">
+    <!-- All Categories Button -->
+    <a href="{{ route('atk.index') }}"
+       id="all-categories"
+       class="active rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
+       style="background-color: #4338ca; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
+       onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#5b63d3'"
+       onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#6366f1'">
+       All Categories
+    </a>
+
+    @foreach (\App\Models\ATK::getKategoriList() as $kat)
+        <a href="{{ route('atk.filter', $kat) }}"
+           class="rounded-full text-base font-medium px-5 py-2.5 text-center me-3 mb-3"
+           style="background-color: #64748b; color: white; border: 2px solid transparent; transition: background-color 0.2s ease;"
+           onmouseover="if(!this.classList.contains('active')) this.style.backgroundColor='#475569'"
+           onmouseout="if(!this.classList.contains('active')) this.style.backgroundColor='#64748b'">
+           {{ $kat }}
+        </a>
+    @endforeach
+</div>
+
+ <!-- Tabel data -->
+        <table class="table">
+            <thead class="thead-dark">
+                <tr class="table-success">
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Stok</th>
+                    <th>Kategori</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($atks as $index => $atk)
+                    <tr>
+                         <td>{{ $atks->firstItem() + $loop->index }}</td> 
+                        <td>{{ $atk->nama }}</td>
+                        <td>{{ $atk->stok }}</td>
+                        <td>{{ $atk->kategori }}</td>
+                        <td>
+                          {{-- Show --}}
+                            <a href="{{ route('atk.show', $atk->id) }}"  style="background: none; border: none; padding: 0; cursor: pointer; outline: none; text-decoration: none; margin-right: 3%;">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
+                            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
+                            </svg>
+                            </a>
+                        </td>   
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+         <div class="d-flex justify-content-end">
+        {{ $atks->links('pagination::bootstrap-5') }}
+        </div>
+
+
 
   <!-- ======================== Scripts ======================== -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -209,6 +201,8 @@
       });
     });
   </script>
+
+  
 
 </main>
 </body>
