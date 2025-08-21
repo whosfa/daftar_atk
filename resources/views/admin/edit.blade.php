@@ -38,6 +38,12 @@
                         <input type="text" name="kategori" class="form-control" value="{{ $atks->kategori }}" required>
                     </div>
 
+                      <div class="col-md-6 mb-3">
+                        <label for="lokasi" class="form-label">Lokasi</label>
+                        <input type="text" name="lokasi" class="form-control" value="{{ $atks->lokasi }}" required>
+                    </div>
+                    
+
                     <div class="col-md-6 mb-3">
                         <label for="deskripsi" class="form-label">Deskripsi</label>
                         <input type="text" name="deskripsi" class="form-control" value="{{ $atks->deskripsi }}" required>

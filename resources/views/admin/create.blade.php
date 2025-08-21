@@ -33,7 +33,6 @@
                     <input type="number" name="stok" class="form-control" placeholder="Masukkan Stok" required>
                 </div>
 
-          
                 <label>Kategori</label>
                 <select name="kategori" class="form-control" required>
                     <option value="" disabled selected>Pilih Kategori</option>
@@ -41,6 +40,12 @@
                         <option value="{{ $kat }}">{{ $kat }}</option>
                     @endforeach
                 </select>
+
+                    <div class="col-md-6 mb-3 mt-4">
+                    <label for="lokasi" class="form-label">Lokasi</label>
+                    <input type="text" name="lokasi" class="form-control" placeholder="Masukkan Lokasi" required>
+                     </div>
+
 
                 <div class="col-md-6 mb-3">
                     <label for="deksripsi" class="form-label">Deskripsi</label>

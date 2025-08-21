@@ -5,13 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-   
 </head>
 <body>				
-
-						<div class="position-absolute start-0 top-0 w-100 h-100" style="background: radial-gradient(125% 125% at 50% 10%, white 40%, rgba(var(--bs-primary-rgb), 1) 100%);">
-
-						
+<div class="start-0 top-0 w-100 h-100" style="background: radial-gradient(125% 125% at 50% 10%, white 40%, rgba(var(--bs-primary-rgb), 1) 100%);">
 
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -23,14 +19,12 @@
                     @csrf
                     <button type="submit" class="btn btn-danger">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
-  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-</svg>
+                        <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z"/>
+                        <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+                        </svg>
                     </button>
                 </form>
             </div>
-
-
         </div>
 
         <div class="mb-3">
@@ -45,7 +39,6 @@
         <a href="{{ route('admin.filter', $kat) }}" class="btn btn-primary">{{ $kat }}</a>
     @endforeach
 </div>
-
 
          <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -62,8 +55,6 @@
             </div>
         </div>
       
-         
-       
         <!--tabel data-->
         <h6 class="mb-0">All ATK</h6>
         <p class="text-body-secondary">berikut adalah daftar atk</p>
@@ -80,8 +71,8 @@
             </thead>
             <tbody>
                 @foreach ($atks as $index => $atk)
-                    <tr>
-                        <td>{{$index + 1}}</td>
+                    <tr>  
+                      <td>{{ $atks->firstItem() + $loop->index }}</td> 
                         <td>{{$atk->nama}}</td>
                         <td>{{$atk->stok}}</td>
                         <td>{{$atk->kategori}}</td>
@@ -117,11 +108,14 @@
                     </tr>
                 @endforeach
             </tbody>
+        
         </table>
+        <div class="d-flex justify-content-end">
+        {{ $atks->links('pagination::bootstrap-5') }}
+        </div>
         </div>
     </div>
-
     </div>
+    </div>                  
 </body>
-
 </html>
