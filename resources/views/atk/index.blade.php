@@ -31,7 +31,7 @@
 
         <!-- Login Button -->
         <div class="md:flex items-center space-x-3">
-          <button type="button"
+          <a href="{{ route('login') }}"
             class="inline-flex justify-center items-center py-2.5 px-5 text-sm font-medium text-black rounded-full 
                    bg-white hover:bg-gray-100 focus:ring-2 focus:ring-white/50 transition-all duration-200
                    shadow-lg hover:shadow-xl transform hover:scale-105">
@@ -41,7 +41,7 @@
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
                 d="M1 5h12m0 0L9 1m4 4L9 9" />
             </svg>
-          </button>
+        </a>
         </div>
 
       </div>
@@ -66,7 +66,7 @@
 
 
   <!-- ======================== Search Form ======================== -->
-  <form class="max-w-xl mx-auto">
+  <form action="{{ route('atk.search') }}" method="GET" class="max-w-xl mx-auto">
     <label for="default-search"
       class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-black">Search</label>
     <div class="relative">
