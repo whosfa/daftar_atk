@@ -8,11 +8,21 @@ use App\Http\Controllers\controller;
 
 class AdminATKController extends Controller
 {
-    public function index()
-    {
+public function index(Request $request)
+{
+    $query = $request->input('q');
+
+    if ($query) {
+        $atks = Atk::where('nama', 'like', "%{$query}%")
+                    ->orWhere('kategori', 'like', "%{$query}%")
+                    ->get();
+    } else {
         $atks = Atk::all();
-        return view('admin.index', compact('atks'));
     }
+
+    return view('admin.index', compact('atks'));
+}
+
 
     public function create()
     {
@@ -25,8 +35,17 @@ class AdminATKController extends Controller
             'nama' => 'required|string',
             'kategori' => 'required',
             'stok' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
              'deskripsi' => 'nullable|string'
         ]);
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('uploads/atk'), $filename);
+            $validated['gambar'] = $filename;
+        }
+    
         // Simpan ke database
         Atk::create($validated);
     
@@ -42,15 +61,24 @@ class AdminATKController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama' => 'required',
             'kategori' => 'required',
             'stok' => 'required|integer',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'deskripsi' => 'required'
         ]);
 
         $atks = Atk::findOrFail($id);
-        $atks->update($request->all());
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $file->move(public_path('uploads/atk'), $filename);
+            $validated['gambar'] = $filename;
+        }
+
+        $atks->update($validated);
 
         return redirect()->route('admin.index')->with('success', 'ATK berhasil diupdate');
     }
@@ -60,6 +88,12 @@ class AdminATKController extends Controller
         $atks = Atk::findOrFail($id);
         $atks->delete();
         return redirect()->route('admin.index')->with('success', 'ATK berhasil dihapus');
+    }
+
+    public function show($id)
+    {
+        $atks = Atk::findOrFail($id);
+        return view('admin.show', compact('atks'));
     }
 }
 

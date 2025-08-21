@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('kategori');
             $table->integer('stok');
             $table->text('deskripsi')->nullable();
+            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

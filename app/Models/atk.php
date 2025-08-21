@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Atk extends Model
 {
-    protected $fillable = ['nama', 'kategori', 'stok', 'deskripsi'];
+    protected $fillable = ['nama', 'kategori', 'stok', 'deskripsi', 'gambar'];
 }

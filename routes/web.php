@@ -5,11 +5,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminATKController;
 use App\Http\Controllers\ATKController;
 
-Route::get('/', [ATKController::class, 'index'])->name('atk.index');
-Route::get('/atk/{id}', [AtkController::class, 'show'])->name('atk.show');
+Route::get('/', [ATKController::class, 'index'])
+    ->middleware('role.redirect')
+    ->name('atk.index');
+
+    Route::get('/tabel', [ATKController::class, 'tabel'])
+     ->middleware('role.redirect')
+    ->name('atk.tabel');
+
+Route::get('/{id}', [ATKController::class, 'show'])
+    ->where('id', '[0-9]+')
+    ->name('atk.show');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/index', [AdminATKController::class, 'index'])->name('index');
+    Route::get('/{id}', [AdminATKController::class, 'show'])
+    ->where('id', '[0-9]+')
+    ->name('atk.show');
     Route::get('/create', [AdminATKController::class, 'create'])->name('create');
     Route::post('/store', [AdminATKController::class, 'store'])->name('store');
     Route::get('/{id}/edit', [AdminATKController::class, 'edit'])->name('edit');
