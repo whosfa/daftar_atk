@@ -13,16 +13,13 @@ class RedirectIfAuthenticatedRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle($request, Closure $next)
+     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin.index'); // route dashboard admin
-            } else {
-                return redirect()->route('home'); // route halaman user
+        if (auth()->check()) {
+            if (auth()->user()->role === 'admin' && !$request->is('admin/*')) {
+                return redirect()->route('admin.index');
             }
         }
-
         return $next($request);
     }
 }

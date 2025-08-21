@@ -8,6 +8,8 @@ use App\Http\Controllers\controller;
 
 class AdminATKController extends Controller
 {
+
+    //tampil
 public function index(Request $request)
 {
     $query = $request->input('q');
@@ -15,15 +17,20 @@ public function index(Request $request)
     if ($query) {
         $atks = Atk::where('nama', 'like', "%{$query}%")
                     ->orWhere('kategori', 'like', "%{$query}%")
-                    ->get();
+                    ->paginate(15);
     } else {
-        $atks = Atk::all();
-    }
+        $atks = Atk::paginate(15);
+    }   
 
     return view('admin.index', compact('atks'));
 }
 
-
+       public function filter($kategori)
+{
+    $atks = ATK::where('kategori', $kategori)->paginate(15);
+    return view('admin.index', compact('atks', 'kategori'));
+} 
+    //tambah
     public function create()
     {
         return view('admin.create');
@@ -36,7 +43,8 @@ public function index(Request $request)
             'kategori' => 'required',
             'stok' => 'required|integer',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-             'deskripsi' => 'nullable|string'
+             'deskripsi' => 'nullable|string',
+             'lokasi'=> 'required|string',
         ]);
 
         if ($request->hasFile('gambar')) {
@@ -53,6 +61,7 @@ public function index(Request $request)
         return redirect()->route('admin.index')->with('success', 'ATK berhasil ditambahkan');
     }
 
+    //edit
     public function edit($id)
     {
         $atks = Atk::findOrFail($id);
@@ -66,7 +75,8 @@ public function index(Request $request)
             'kategori' => 'required',
             'stok' => 'required|integer',
             'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'deskripsi' => 'required'
+            'deskripsi' => 'required',
+            'lokasi'=> 'required',
         ]);
 
         $atks = Atk::findOrFail($id);
@@ -83,6 +93,7 @@ public function index(Request $request)
         return redirect()->route('admin.index')->with('success', 'ATK berhasil diupdate');
     }
 
+    //hapus
     public function destroy($id)
     {
         $atks = Atk::findOrFail($id);

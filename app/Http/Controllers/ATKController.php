@@ -11,15 +11,22 @@ class ATKController extends Controller
 
     //tampil
        public function index() {
-        $atks = Atk::all();
+        $atks = Atk::paginate(15);
         return view('atk.index', compact('atks'));
        }
 
+       public function filter($kategori)
+{
+    $atks = ATK::where('kategori', $kategori)->paginate(15);
+    return view('atk.index', compact('atks', 'kategori'));
+} 
+
       public function tabel() {
-        $atks = Atk::all();
-        return view('atk.tabel', compact('atks'));
+        $atks = Atk::paginate(15);
+        return view('atk.tabel',  compact('atks'));
       }
-      
+
+
     public function show($id)
     {
         $atks = Atk::findOrFail($id);
@@ -30,6 +37,6 @@ class ATKController extends Controller
     {
         $query = request('q');
         $atks = Atk::where('nama', 'like', "%$query%")->get();
-        return view('atk.tabel', compact('atks'));
+        return view('atk.index', compact('atks'));
     }
 }

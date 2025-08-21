@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('atks', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('kategori');
+            $table->enum('kategori', ['Alat Tulis', 'Baterai', 'Kertas & Amplop', 'Perlengkapan Meja Kantor', 'Perlengkapan Arsip', 'Alat Jepit & Klip', 'Staples & Pelubang', 'Tinta & Cartridge', 'Perekat & Isolasi']);
             $table->integer('stok');
             $table->text('deskripsi')->nullable();
             $table->string('gambar')->nullable();
+            $table->string('lokasi');
             $table->timestamps();
         });
     }
